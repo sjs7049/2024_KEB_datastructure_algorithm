@@ -1,17 +1,35 @@
-import random
+## 함수 선언 부분 ##
+def print_poly(f_x) -> str:
+    term = len(f_x) - 1
+    poly_expression = "f(x) = "
 
-ans = random.randint(1,100)
-chance = 7
+    for i in range(len(fx)):
+        coefficient = f_x[i]
 
-while chance != 0:
-    guess = int(input("Input the guess number : "))
-    chance -= 1
-    if guess == ans:
-        print(f"That's correct. Random number is {ans}!!")
-        break
-    elif guess < ans:
-        print(f"The number is greater than {guess}.")
-    else:
-        print(f"The number is lower than {guess}.")
-else:
-    print("You've exhausted our chances of guessing. Random number is {ans}!!")
+        if coefficient >= 0:
+            poly_expression += "+"
+        poly_expression = poly_expression + f'{coefficient}x^{term} '
+        term -= 1
+
+    return poly_expression
+
+
+def calculation_poly(x_value, f_x) -> int:
+    return_value = 0
+    term = len(f_x) - 1
+
+    for i in range(len(fx)):
+        coefficient = f_x[i]
+        return_value += coefficient * pow(x_value, term)
+        term -= 1
+
+    return return_value
+
+
+fx = [2, 3, 4, 0, -9]
+
+if __name__ == "__main__":
+    print(print_poly(fx))
+    print(calculation_poly(int(input("X 값 : ")), fx))
+
+
