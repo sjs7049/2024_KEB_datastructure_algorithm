@@ -1,23 +1,25 @@
-# def factorial(number) -> int:
-#     '''
-#     factorial by repitition
-#     :param number: number (int)
-#     :return: factorial result
-#     '''
-#     result = 1
-#     for i in range(1, number):
-#         result *= i
-#     return result
+import time
 
 def factorial(number) -> int:
     '''
-    factorial by recursion
+    factorial by repitition
     :param number: number (int)
     :return: factorial result
     '''
-    if number == 0 or number == 1:
-        return 1
-    return number * factorial(number-1)
+    result = 1
+    for i in range(1, number):
+        result *= i
+    return result
+
+# def factorial(number) -> int:
+#     '''
+#     factorial by recursion
+#     :param number: number (int)
+#     :return: factorial result
+#     '''
+#     if number == 0 or number == 1:
+#         return 1
+#     return number * factorial(number-1)
 
 def nCr(n, r) -> int:
     '''
@@ -26,6 +28,9 @@ def nCr(n, r) -> int:
     :param r: 선택 개수
     :return: nCr 값
     '''
+    start = time.time()
     numerator = factorial(n)
     denominator = factorial(n-r) * factorial(r)
+    end = time.time()
+    print(f'소요 시간: {end - start}')
     return int(numerator / denominator)
