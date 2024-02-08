@@ -1,5 +1,7 @@
 def factorial(number) -> int:
-    pass
+    if number == 0 or number == 1:
+        return 1
+    return number * factorial(number-1)
 
 def nCr(n, r) -> int:
     '''
@@ -10,8 +12,8 @@ def nCr(n, r) -> int:
     '''
     numerator = factorial(n)
     denominator = factorial(n-r) * factorial(r)
-    return numerator / denominator
+    return int(numerator / denominator)
 
 if __name__ == "__main__":
-    n,r = map(int, input("Input n, r").split())
+    n,r = map(int, input("Input n, r : ").split())
     print(f'{n}C{r} = {nCr(n, r)}')
