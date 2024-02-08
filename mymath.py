@@ -31,7 +31,7 @@ def factorial(number) -> int:
     return number * factorial(number-1)
 
 @timer
-def nCr(n, r) -> int:
+def nCr(n, r) -> int: # SRP, OCP
     '''
     combination function
     :param n: 전체 개수
