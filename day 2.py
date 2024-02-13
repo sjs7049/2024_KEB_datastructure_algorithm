@@ -1,16 +1,19 @@
-def push(data):
+def pop() :
 	global size, stack, top
-	if top >= size - 1:
-		print("스택이 꽉 찼습니다.")
-		return
-	top += 1
-	stack[top] = data
+	if top == -1:
+		print("스택이 비었습니다.")
+		return None
+	data = stack[top]
+	stack[top] = None
+	top -= 1
+	return data
 
 size = 5
-stack = ["커피", "녹차", "꿀물", "콜라", None]
-top = 3
+stack = ["커피", None, None, None, None]
+top = 0
 
 print(stack)
-push("환타")
+retData = pop()
+print("추출한 데이터 -->", retData)
 print(stack)
-push("게토레이")
+retData = pop()
