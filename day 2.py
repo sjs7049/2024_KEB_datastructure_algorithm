@@ -1,17 +1,20 @@
-def en_queue(data):
+def de_queue() :
 	global size, queue, front, rear
-	if rear == size - 1:
-		print("큐가 꽉 찼습니다.")
-		return
-	rear += 1
-	queue[rear] = data
+	if front == rear:
+		print("큐가 비었습니다.")
+		return None
+	front += 1
+	data = queue[front]
+	queue[front] = None
+	return data
 
 size = 5
-queue = ["화사", "솔라", "문별", "휘인", None]
+queue = ["화사", None, None, None, None]
 front = -1
-rear = 3
+rear = 0
 
 print(queue)
-en_queue("선미")
+retData = de_queue()
+print("추출한 데이터 -->", retData)
 print(queue)
-en_queue("재남")
+retData = de_queue()
