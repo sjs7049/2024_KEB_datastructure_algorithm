@@ -1,3 +1,5 @@
+import random
+
 class Node:
     def __init__(self):
         self.data = None
@@ -13,40 +15,42 @@ def print_nodes(start):
         print(current.data, end=' ')
     print()
 
-def insert_data(name_email):
+def lotto_list(number):
     global head, current, pre
-    print_nodes(head)
 
     node = Node()
-    node.data = name_email
-
-    if head == None:
+    node.data = number
+    if head is None:
         head = node
         return
 
-    if head.data[1] > name_email[1]:
+    if head.data > number:
         node.link = head
         head = node
         return
 
     current = head
-    while current.link != None:
+    while current.link is not None:
         pre = current
         current = current.link
-        if current.data[1] > name_email[1]:
+        if current.data > number:
             pre.link = node
             node.link = current
             return
 
     current.link = node
 
+
+
 head, current, pre = None, None, None
 
 if __name__ == "__main__":
+    cnt_lotto = 0
     while True:
-        name = input("이름--> ")
-        if name == "" or name is None:
+        lotto = random.randint(1,45)
+        cnt_lotto += 1
+        lotto_list(lotto)
+        if cnt_lotto == 6:
             break
-        email = input("이메일--> ")
-        insert_data([name, email])
-        print_nodes(head)
+
+    print_nodes(head)
