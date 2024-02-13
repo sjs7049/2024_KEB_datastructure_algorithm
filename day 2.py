@@ -1,16 +1,42 @@
-katok = ['다현', '정연', '쯔위', '사나', '지효']
+def print_poly(f_x):
+    term = len(f_x) - 1
+    poly_str = "f(x) = "
 
-def delete_data(position):
-    if position < 0 or position > len(katok):
-        print("데이터를 삭제할 범위를 벗어났습니다.")
-        return
+    for i in range(len(fx)):
+        coef = f_x[i]
 
-    katok_Len = len(katok)
+        if coef == 0:
+            term -= 1
+            continue
+        if coef >= 0 and i != 0:
+            poly_str += "+"
+        poly_str += str(coef) + "x^" + str(term) + " "
+        term -= 1
 
-    del katok[position: katok_Len]
+    return poly_str
 
 
-delete_data(1)
-print(katok)
-delete_data(3)
-print(katok)
+def calc_poly(x_val, f_x):
+    ret_value = 0
+    term = len(f_x) - 1
+
+    for i in range(len(fx)):
+        coef = f_x[i]
+        ret_value += coef * pow(x_value, term)
+        term -= 1
+
+    return ret_value
+
+
+fx = [7, -4, 0, 5]
+
+if __name__ == "__main__":
+    f_str = print_poly(fx)
+    print(f_str)
+
+    x_value = int(input("X 값 : "))
+
+    pxValue = calc_poly(x_value, fx)
+    print(pxValue)
+
+
