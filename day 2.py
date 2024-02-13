@@ -1,37 +1,34 @@
-katok = [('다현', 200), ('정연', 150), ('쯔위', 90), ('사나', 30), ('지효', 15)]
+def print_poly(f_x):
+    poly_str = "f(x) = "
 
-def add_data(k_friend, k_cnt):
-    find = -1
-    for i in range(len(katok)):
-        if k_cnt >= katok[i][1]:
-            find = i
-            break
-    if find == -1:
-        find = len(katok)
+    for i in range(len(f_x)):
+        term = f_x[i][0]
+        coef = f_x[i][1]
 
-    insert_data(find, (k_friend, k_cnt))
+        if coef >= 0:
+            poly_str += "+"
+        poly_str += str(coef) + "x^" + str(term) + " "
 
-def insert_data(position, friend):
-    if position < 0 or position > len(katok):
-        print("데이터를 삽입할 범위를 벗어났습니다.")
-        return
+    return poly_str
 
-    katok.append(None)
-    kLen = len(katok)
 
-    for i in range(kLen - 1, position, -1):
-        katok[i] = katok[i-1]
-        katok[i-1] = None
+def calc_poly(x_val, f_x):
+    ret_value = 0
 
-    katok[position] = friend
+    for i in range(len(fx)):
+        term = f_x[i][0]
+        coef = f_x[i][1]
+        ret_value += coef * pow(x_value, term)
+
+    return ret_value
+
+fx = [[300, 7], [20, -4], [0, 5]]
 
 if __name__ == "__main__":
-    name = input("추가할 친구 ---> ")
-    cnt = int(input("카톡 횟수 ---> "))
-    add_data(name, cnt)
-    print(katok)
+    pStr = print_poly(fx)
+    print(pStr)
 
-    name = input("추가할 친구 ---> ")
-    cnt = int(input("카톡 횟수 ---> "))
-    add_data(name, cnt)
-    print(katok)
+    x_value = int(input("X 값-->"))
+
+    pxValue = calc_poly(x_value, fx)
+    print(pxValue)
