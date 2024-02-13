@@ -1,34 +1,52 @@
-def print_poly(f_x):
-    poly_str = "f(x) = "
+class Node:
+    def __init__(self):
+        self.data = None
+        self.link = None
 
-    for i in range(len(f_x)):
-        term = f_x[i][0]
-        coef = f_x[i][1]
+def print_nodes(start):
+    current = start
+    if current is None:
+        return
+    print(current.data, end=' ')
+    while current.link is not None:
+        current = current.link
+        print(current.data, end=' ')
+    print()
 
-        if coef >= 0:
-            poly_str += "+"
-        poly_str += str(coef) + "x^" + str(term) + " "
+def insert_data(name_email):
+    global head, current, pre
+    print_nodes(head)
 
-    return poly_str
+    node = Node()
+    node.data = name_email
 
+    if head == None:
+        head = node
+        return
 
-def calc_poly(x_val, f_x):
-    ret_value = 0
+    if head.data[1] > name_email[1]:
+        node.link = head
+        head = node
+        return
 
-    for i in range(len(fx)):
-        term = f_x[i][0]
-        coef = f_x[i][1]
-        ret_value += coef * pow(x_value, term)
+    current = head
+    while current.link != None:
+        pre = current
+        current = current.link
+        if current.data[1] > name_email[1]:
+            pre.link = node
+            node.link = current
+            return
 
-    return ret_value
+    current.link = node
 
-fx = [[300, 7], [20, -4], [0, 5]]
+head, current, pre = None, None, None
 
 if __name__ == "__main__":
-    pStr = print_poly(fx)
-    print(pStr)
-
-    x_value = int(input("X 값-->"))
-
-    pxValue = calc_poly(x_value, fx)
-    print(pxValue)
+    while True:
+        name = input("이름--> ")
+        if name == "" or name is None:
+            break
+        email = input("이메일--> ")
+        insert_data([name, email])
+        print_nodes(head)
