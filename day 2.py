@@ -1,19 +1,17 @@
-def pop():
-	global size, stack, top
-	if top == -1:
-		print("스택이 비었습니다.")
-		return None
-	data = stack[top]
-	stack[top] = None
-	top -= 1
-	return data
+def en_queue(data):
+	global size, queue, front, rear
+	if rear == size - 1:
+		print("큐가 꽉 찼습니다.")
+		return
+	rear += 1
+	queue[rear] = data
 
 size = 5
-stack = ["커피", None, None, None, None]
-top = 0
+queue = ["화사", "솔라", "문별", "휘인", None]
+front = -1
+rear = 3
 
-print(stack)
-retData = pop()
-print("추출한 데이터 --> ", retData)
-print(stack)
-retData = pop()
+print(queue)
+en_queue("선미")
+print(queue)
+en_queue("재남")
