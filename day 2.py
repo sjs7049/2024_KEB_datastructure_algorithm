@@ -1,23 +1,16 @@
-def check_bracket(expr: str) -> bool:
-    '''
-    Check bracket in expression.
-    :param expr: str
-    :return: bool
-    '''
-    stack = []
-    table = {')': '(', ']': '[', '}': '{', '>': '<'}
-    for char in expr:
-        if char in table.values():
-            stack.append(char) # push
-        elif char in table.keys():
-            if not stack or table[char] != stack.pop(): # pop
-                return False
-        else:
-            pass
-    return len(stack) == 0
+katok = ['다현', '정연', '쯔위', '사나', '지효']
+
+def delete_data(position):
+    if position < 0 or position > len(katok):
+        print("데이터를 삭제할 범위를 벗어났습니다.")
+        return
+
+    katok_Len = len(katok)
+
+    del katok[position: katok_Len]
 
 
-if __name__ == "__main__" :
-    expression = input("Input expression : ")
-
-    print(check_bracket(expression))
+delete_data(1)
+print(katok)
+delete_data(3)
+print(katok)
