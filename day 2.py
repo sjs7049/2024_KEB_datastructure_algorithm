@@ -3,7 +3,7 @@ class Node:
 		self.data = None
 		self.link = None
 
-def print_nodes(start):
+def print_nodes(start) :
 	current = start
 	if current is None:
 		return
@@ -13,53 +13,39 @@ def print_nodes(start):
 		print(current.data, end=' ')
 	print()
 
-def delete_node(delete_data):
+def make_simple_linked_list(namePhone):
 	global head, current, pre
+	print_nodes(head)
 
-	if head.data == delete_data:
-		current = head
-		head = head.link
-		print("# 첫 노드가 삭제됨 #")
-		del current
+	node = Node()
+	node.data = namePhone
+	if head is None:
+		head = node
+		return
+
+	if head.data[1] > namePhone[1]:
+		node.link = head
+		head = node
 		return
 
 	current = head
-	while current.link is not None:
+	while current.link is not None :
 		pre = current
 		current = current.link
-		if current.data == delete_data:
-			pre.link = current.link
-			print("# 중간 노드가 삭제됨 #")
-			del current
+		if current.data[1] > namePhone[1]:
+			pre.link = node
+			node.link = current
 			return
-	else:
-		print("# 삭제된 노드가 없음 #")
+
+	current.link = node
+
 
 head, current, pre = None, None, None
-data_array = ["다현", "정연", "쯔위", "사나", "지효"]
+data_array = [["지민", "180"], ["정국", "177"], ["뷔", "183"], ["슈가", "175"], ["진", "179"]]
 
 if __name__ == "__main__":
-	node = Node()
-	node.data = data_array[0]
-	head = node
 
-	for data in data_array[1:]:
-		pre = node
-		node = Node()
-		node.data = data
-		pre.link = node
+	for data in data_array:
+		make_simple_linked_list(data)
 
-
-	print_nodes(head)
-
-	delete_node("다현")
-	print_nodes(head)
-
-	delete_node("쯔위")
-	print_nodes(head)
-
-	delete_node("사나")
-	print_nodes(head)
-
-	delete_node("재남")
 	print_nodes(head)
