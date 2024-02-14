@@ -23,6 +23,23 @@ def fibo_repetition(number):
         a,b = b, a + b
     return a
 
+memo = [None for _ in range(100)]
+def fibo_memoization(number, memo) -> int :
+    '''
+    fibonacci function by recursion with memoization.
+    :param number: integer number
+    :return: integer number
+    '''
+    if memo[number] is not None: # 한 번 계산한 결과를 가지고 있으면 바로 리턴
+        return memo[number]
+
+    if number < 2:
+        result = number
+    else:
+        result = fibo_memoization(number - 1, memo) + fibo_memoization(number - 2, memo)
+    memo[number] = result
+    return result
+
 n = int(input("Input the number : "))
 for i in range(0, n+1):
-    print(fibo_repetition(i), end=' ')
+    print(fibo_memoization(i, memo), end=' ')
