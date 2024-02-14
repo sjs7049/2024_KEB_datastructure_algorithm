@@ -1,48 +1,41 @@
-def fibo_recursion(number) -> int :
-    '''
-    fibonacci function by recursion.
-    :param number: integer number
-    :return: integer number
-    '''
-    if number == 0:
-        return 0
-    elif number == 1:
-        return 1
-    else:
-        return fibo_recursion(number - 1) + fibo_recursion(number - 2)
+class Tree_node:
+    def __init__(self):
+        self.data = None
+        self.left = None
+        self.right = None
 
-def fibo_repetition(number):
-    '''
-    fibonacci function by repetion.
-    :param number: integer number
-    :return: integer number
-    '''
-    a = 0
-    b = 1
-    for _ in range(number):
-        a,b = b, a + b
-    return a
+goods_sold = ['레쓰비캔커피','레쓰비캔커피','레쓰비캔커피', '도시락','도시락','삼각김밥',
+              '레쓰비캔커피','도시락','코카콜라','삼다수','레쓰비캔커피','레쓰비캔커피',
+              '레쓰비캔커피','츄팝춥스','츄팝춥스','레쓰비캔커피','코카콜라','츄팝춥스',
+              '삼각김밥','코카콜라']
 
+if __name__ == "__main__":
+    print(f"오늘 판매됨 물건(중복O) --->", goods_sold)
+    print('\n이진 탐색 트리 구성 완료!')
 
-memo = [None for _ in range(100)] # 메모리 사용 - 한 번 계산한 결과를 바로 쓸 수 있게
-def fibo_memoization(number) -> int :
-    '''
-    fibonacci function by recursion with memoization.
-    :param number: integer number
-    :return: integer number
-    '''
-    global memo
-    if memo[number] is not None: # 한 번 계산한 결과를 가지고 있으면 바로 리턴
-        return memo[number]
+    node = Tree_node()
+    node.data = goods_sold[0]
+    root = node
 
-    if number < 2:
-        result = number
-    else:
-        result = fibo_memoization(number - 1) + fibo_memoization(number - 2)
-        memo[number] = result
-    return result
+    print("\n오늘 판매된 종류(중복X) --->", node.data, end=' ')
+    for goods in goods_sold[1:]:
+        node = Tree_node()
+        node.data = goods
+        current = root
 
-n = int(input("Input the number : "))
-#print(fibo_memoization(n), memo[:n+1])
-for i in range(0, n+1):
-    print(fibo_memoization(i), end=' ')
+        while True:
+            if goods < current.data:
+                if current.left is None:
+                    current.left = node
+                    print(node.data, end=' ')
+                    break
+                current = current.left
+            elif goods > current.data:
+                if current.right is None:
+                    current.right = node
+                    print(node.data, end=' ')
+                    break
+                current = current.right
+            else:
+                break
+
