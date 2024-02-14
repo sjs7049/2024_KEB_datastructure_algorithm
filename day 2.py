@@ -1,41 +1,44 @@
-class Node:
-    def __init__(self):
-        self.data = None
-        self.forward_link = None
-        self.reverse_link = None
+def is_stack_full():
+    global size, top
+    return top >= size - 1
 
-def print_nodes(start):
-    current = start
-    if current.forward_link is None:
-        return
-    print("과자 집에 가는 길 : ", end=' ')
-    print(f"{current.data} --->", end=' ')
-    while current.forward_link is not None:
-        current = current.forward_link
-        print(f"{current.data} --->", end=' ')
-    print('과자집')
+def is_stack_empty():
+    global top
+    return top == -1
 
-    print("우리 집에 가는 길 : ", end=' ')
-    print(f"{current.data} --->", end=' ')
-    while current.reverse_link is not None:
-        current = current.reverse_link
-        print(f"{current.data} --->", end=' ')
-    print('우리집')
+def push(data):
+    global stack, top
+    if is_stack_full():
+        return None
+    top += 1
+    stack[top] = data
 
+def pop():
+    global stack, top
+    if is_stack_empty():
+        return None
+    data = stack[top]
+    stack[top] = None
+    top -= 1
+    return data
 
-head, current, pre = None, None, None
-color_array = ['주황', '초록', '파랑', '보라', '빨강', '노랑']
+size = 10
+top = -1
+stack = [None for _ in range(size)]
 
 if __name__ == "__main__":
-    node = Node()
-    node.data = color_array[0]
-    head = node
+    color_array = ['주황', '초록', '파랑', '보라', '빨강', '노랑']
 
-    for color in color_array[1:]:
-        pre = node
-        node = Node()
-        node.data = color
-        pre.forward_link = node
-        node.reverse_link = pre
+    print("과자 집에 가는 길 :", end=' ')
+    for color in color_array:
+        push(color)
+        print(f"{color} --->", end=' ')
+    print("과자집")
 
-    print_nodes(head)
+    print("우리 집에 가는 길 :", end=' ')
+    while True:
+        color = pop()
+        if color is None:
+            break
+        print(f"{color} --->", end=' ')
+    print("우리집")
