@@ -1,13 +1,28 @@
-def decimal_to_octal(number) -> int:
+def fibo_recursion(number) -> int :
     '''
-    decimal number to octal number
-    :param number: int (base decimal)
-    :return: str (base octal)
+    fibonacci function by recursion.
+    :param number: integer number
+    :return: integer number
     '''
-    if number < 8:
-        return str(number)
+    if number == 0:
+        return 0
+    elif number == 1:
+        return 1
     else:
-        return decimal_to_octal(number // 8) + str(n % 8)
+        return fibo_recursion(number - 1) + fibo_recursion(number - 2)
 
-n = int(input("Input decimal number: "))
-print(decimal_to_octal(n))
+def fibo_repetition(number):
+    '''
+    fibonacci function by repetion.
+    :param number: integer number
+    :return: integer number
+    '''
+    a = 0
+    b = 1
+    for _ in range(number):
+        a,b = b, a + b
+    return a
+
+n = int(input("Input the number : "))
+for i in range(0, n+1):
+    print(fibo_repetition(i), end=' ')
